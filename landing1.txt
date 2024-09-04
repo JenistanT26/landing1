@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popcorn Sales Order</title>
+    <style>
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .form-table td {
+            padding: 5px;
+        }
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .order-table td {
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Popcorn Sales Order Form</h1>
+    <form id="orderForm">
+        <!-- Buyer Information -->
+        <table class="form-table">
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" name="name" required></td>
+            </tr>
+            <tr>
+                <td><label for="address">Address:</label></td>
+                <td><input type="text" id="address" name="address" required></td>
+            </tr>
+            <tr>
+                <td><label for="phone">Phone:</label></td>
+                <td><input type="text" id="phone" name="phone" required></td>
+            </tr>
+        </table>
+        
+        <!-- Order Details -->
+        <table class="order-table">
+            <tr>
+                <td>Product</td>
+                <td>Price</td>
+                <td>Quantity</td>
+            </tr>
+            <tr>
+                <td>Butter Popcorn</td>
+                <td>$5.00</td>
+                <td><input type="number" id="butterQuantity" name="butterQuantity" size="2" min="0"></td>
+            </tr>
+            <tr>
+                <td>Cheese Popcorn</td>
+                <td>$6.00</td>
+                <td><input type="number" id="cheeseQuantity" name="cheeseQuantity" size="2" min="0"></td>
+            </tr>
+            <tr>
+                <td>Caramel Popcorn</td>
+                <td>$7.00</td>
+                <td><input type="number" id="caramelQuantity" name="caramelQuantity" size="2" min="0"></td>
+            </tr>
+        </table>
+
+        <!-- Payment Method -->
+        <p>Payment Method:</p>
+        <label><input type="radio" name="paymentMethod" value="creditCard" required> Credit Card</label>
+        <label><input type="radio" name="paymentMethod" value="paypal" required> PayPal</label>
+        <label><input type="radio" name="paymentMethod" value="bankTransfer" required> Bank Transfer</label>
+        <label><input type="radio" name="paymentMethod" value="cash" required> Cash</label>
+
+        <br><br>
+        <button type="button" onclick="validateForm()">Submit Order</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const butterQuantity = parseInt(document.getElementById('butterQuantity').value) || 0;
+            const cheeseQuantity = parseInt(document.getElementById('cheeseQuantity').value) || 0;
+            const caramelQuantity = parseInt(document.getElementById('caramelQuantity').value) || 0;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+            if (name === '' || address === '' || phone === '') {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            if (!paymentMethod) {
+                alert('Please select a payment method.');
+                return;
+            }
+
+            if (isNaN(butterQuantity) || isNaN(cheeseQuantity) || isNaN(caramelQuantity)) {
+                alert('Please enter valid quantities.');
+                return;
+            }
+
+            // If all validations pass, you can submit the form or handle it as needed
+            alert('Order submitted successfully!');
+            // You can use form.submit() if you want to actually submit the form
+        }
+    </script>
+</body>
+</html>
+
+landing.css
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap");
+
+:root {
+  --primary-color: #669ccb;
+  --primary-color-dark: #5681a7;
+  --secondary-color: #e8f1fa;
+  --text-dark: #282d31;
+  --text-light: #767268;
+  --extra-light: #f3f4f6;
+
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.section__container {
+  padding: 5rem 1rem;
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.section__title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section__subtitle {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--primary-color);
+  margin-bottom: 5rem;
+  text-align: center;
+}
+
+img {
+  width: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo a {
+  text-decoration: none;
+  color: var(--extra-light);
+  font-size: 1.5rem;
+}
+
+.nav__links {
+  display: none;
+  list-style: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link {
+  color: var(--extra-light);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.link:hover {
+  color: var(--primary-color);
+}
+
+header {
+  height: 100vh;
+  background-image: url("images/bg-1.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header .section__container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  color: var(--extra-light);
+}
+
+.header__content h1 {
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 5rem;
+}
+
+.header__content p {
+  text-align: center;
+}
+
+.header__content button {
+  padding: 1rem 2rem;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: var(--extra-light);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header__content button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.journey__container {
+  background-color: var(--secondary-color);
+}
+
+.journey__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.country__card {
+  background-color: var(--extra-light);
+}
+
+.country__name {
+  padding: 1rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.country__name i {
+  font-size: 1.2rem;
+}
+
+.country__name span {
+  font-style: italic;
+}
+
+.banner__container {
+  background-image: linear-gradient(
+      rgba(35, 71, 103, 0.5),
+      rgba(35, 71, 103, 0.5)
+    ),
+    url("assets/bg-2.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.banner__container .section__container {
+  padding: 10rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.banner__content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+  color: var(--extra-light);
+}
+
+.banner__content h2 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.banner__content button {
+  padding: 0.5rem 2rem;
+  outline: none;
+  border: 2px solid var(--secondary-color);
+  background-color: transparent;
+  color: var(--secondary-color);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.display__container {
+  background-color: var(--secondary-color);
+}
+
+.display__container :is(.section__title, .section__subtitle) {
+  color: var(--text-dark);
+}
+
+.display__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.display__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: var(--extra-light);
+  text-align: center;
+}
+
+.display__card i {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.display__card h4 {
+  font-size:1rem;
+  font-weight: 500;
+  padding: 0 1rem;
+  color: var(--text-dark);
+}
+
+.display__card p {
+  font-size: 0.8rem;
+  padding: 0 1rem;
+  color: var(--text-dark);
+}
+
+.display__grid .grid-1 {
+  grid-area: 1/1/3/3;
+}
+
+footer {
+  background-color: var(--text-dark);
+  color: var(--secondary-color);
+}
+
+footer .section__container {
+  display: grid;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+footer h4 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.social__icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social__icons i {
+  padding: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+footer p {
+  font-style: italic;
+}
+
+@media (min-width: 640px) {
+  .nav__links {
+    display: flex;
+  }
+
+  header .section__container {
+    justify-content: flex-start;
+  }
+
+  .header__content {
+    max-width: 400px;
+    align-items: flex-start;
+  }
+
+  .header__content p {
+    text-align: left;
+  }
+
+  .journey__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .display__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .display__card {
+    gap: 0;
+  }
+
+  .display__card i {
+    font-size: 1.75rem;
+  }
+
+  .display__card h4 {
+    font-size: 1rem;
+  }
+
+  .display__card p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 786px) {
+  .banner__container .section__container {
+    justify-content: flex-end;
+  }
+
+  .banner__content {
+    align-items: flex-end;
+    text-align: right;
+    max-width: 800px;
+  }
+
+  .display__card {
+    gap: 0.5rem;
+  }
+
+  .display__card i {
+    font-size: 2.5rem;
+  }
+
+  .display__card p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .display__card {
+    gap: 1rem;
+  }
+
+  .display__card i {
+    font-size: 3rem;
+  }
+
+  .display__card h4 {
+    font-size: 1.5rem;
+  }
+
+  .display__card p {
+    font-size: 1rem;
+  }
+}
